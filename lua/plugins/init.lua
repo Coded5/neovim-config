@@ -41,6 +41,7 @@ return {
   		ensure_installed = {
   			"lua-language-server", "stylua",
   			"html-lsp", "css-lsp" , "prettier"
+        ,"codelldb"
   		},
   	},
   },
@@ -61,5 +62,5 @@ return {
             -- Configuration here, or leave empty to use defaults
         })
     end
-  }, 
+  },
 }
