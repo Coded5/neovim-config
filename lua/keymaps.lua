@@ -4,6 +4,8 @@ map("i", "jk", "<esc>")
 map("n", "<leader>p", '"_dP')
 map("n", "<A-j>", "ddp")
 map("n", "<A-k>", "dd2kp")
+map("n", "<C-d>", "<C-d>zz")
+map("n", "<C-u>", "<C-u>zz")
 
 -- Nvim tree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Tree" })

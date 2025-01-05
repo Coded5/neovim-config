@@ -18,10 +18,10 @@ cmp.setup({
 	},
 
 	sources = cmp.config.sources({
-		{ name = "luasnip", keyword_length = 5 },
-		{ name = "nvim_lsp", keyword_length = 3 },
+		{ name = "luasnip" },
+		{ name = "nvim_lsp" },
 	}, {
-		{ name = "buffer", keyword_length = 4 },
+		{ name = "buffer" },
 		{ name = "path" },
 	}),
 
@@ -34,4 +34,3 @@ cmp.setup({
 		["<CR>"] = cmp.mapping.confirm({ select = true }),
 	}),
 })
-

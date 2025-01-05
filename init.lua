@@ -37,7 +37,7 @@ function lazy.setup(plugins)
 	end
 
 	-- You can "comment out" the line below after lazy.nvim is installed
-	lazy.install(lazy.path)
+	-- lazy.install(lazy.path)
 
 	vim.opt.rtp:prepend(lazy.path)
 
@@ -48,9 +48,14 @@ end
 lazy.path = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 lazy.opts = {}
 
-lazy.setup(require("plugins"))
+lazy.setup({
+	spec = {
+		{ import = "plugins" },
+	},
+	checker = { enabled = true },
+})
 
-vim.cmd.colorscheme("catppuccin")
+-- lazy.setup(require("plugins"))
 
 vim.api.nvim_create_user_command("ReloadConfig", "source $MYVIMRC", {})
 

@@ -32,7 +32,7 @@ local config = {
 	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	cmd = {
-		"java",
+		"/usr/lib/jvm/java-1.21.0-openjdk-amd64/bin/java",
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -63,13 +63,18 @@ local config = {
 	-- See https://github.com/eclipse/eclipse.jdt.ls/wiki/Running-the-JAVA-LS-server-from-the-command-line#initialize-request
 	settings = {
 		java = {
-			home = "/usr/lib/jvm/java-17-openjdk-amd64/",
+			home = "/usr/lib/jvm/java-21-openjdk-amd64/",
+			-- home = "/mnt/c/Users/phoen/.jdks/openjdk-23.0.1/",
 			eclipse = {
 				downloadSources = true,
 			},
 			configuration = {
 				updateBuildConfiguration = "interactive",
 				runtimes = {
+					-- {
+					-- 	name = "JavaSE-23",
+					-- 	path = "/mnt/c/Users/phoen/.jdks/openjdk-23.0.1/",
+					-- },
 					{
 						name = "JavaSE-8",
 						path = "/usr/lib/jvm/java-8-openjdk-amd64/",
