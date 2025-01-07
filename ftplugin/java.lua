@@ -1,7 +1,7 @@
 -- JDTLS (Java LSP) configuration
+local jdtls = require("jdtls")
 local home = vim.env.HOME -- Get the home directory
 
-local jdtls = require("jdtls")
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
 local workspace_dir = home .. "/jdtls-workspace/" .. project_name
 
@@ -32,7 +32,7 @@ local config = {
 	-- The command that starts the language server
 	-- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
 	cmd = {
-		"/usr/lib/jvm/java-1.21.0-openjdk-amd64/bin/java",
+		"/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
 		"-Declipse.application=org.eclipse.jdt.ls.core.id1",
 		"-Dosgi.bundles.defaultStartLevel=4",
 		"-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -75,18 +75,18 @@ local config = {
 					-- 	name = "JavaSE-23",
 					-- 	path = "/mnt/c/Users/phoen/.jdks/openjdk-23.0.1/",
 					-- },
-					{
-						name = "JavaSE-8",
-						path = "/usr/lib/jvm/java-8-openjdk-amd64/",
-					},
-					{
-						name = "JavaSE-11",
-						path = "/usr/lib/jvm/java-11-openjdk-amd64/",
-					},
-					{
-						name = "JavaSE-17",
-						path = "/usr/lib/jvm/java-17-openjdk-amd64/",
-					},
+					-- {
+					-- 	name = "JavaSE-8",
+					-- 	path = "/usr/lib/jvm/java-8-openjdk-amd64/",
+					-- },
+					-- {
+					-- 	name = "JavaSE-11",
+					-- 	path = "/usr/lib/jvm/java-11-openjdk-amd64/",
+					-- },
+					-- {
+					-- 	name = "JavaSE-17",
+					-- 	path = "/usr/lib/jvm/java-17-openjdk-amd64/",
+					-- },
 					{
 						name = "JavaSE-21",
 						path = "/usr/lib/jvm/java-21-openjdk-amd64/",
