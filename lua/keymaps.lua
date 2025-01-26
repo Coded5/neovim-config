@@ -31,6 +31,8 @@ map("n", "<C-l>", "<cmd>wincmd l<CR>")
 
 map("n", "<C-t>", '<cmd>exe v:count1 . "ToggleTerm"<CR>')
 
+map()
+
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
 	map("t", "<esc>", [[<C-\><C-n>]], opts)
@@ -47,3 +49,7 @@ vim.cmd("autocmd! TermOpen term://* lua set_terminal_keymaps()")
 map("n", "<C-/>", function()
 	require("Comment.api").toggle.linewise.current()
 end, { noremap = true, silent = true })
+
+map("n", "<Leader>q", function()
+	vim.lsp.inlay_hint.enable(0, not lsp.inlay_hint.is_enabled())
+end)

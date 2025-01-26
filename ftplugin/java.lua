@@ -3,7 +3,7 @@ local jdtls = require("jdtls")
 local home = vim.env.HOME -- Get the home directory
 
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = home .. "/jdtls-workspace/" .. project_name
+local workspace_dir = home .. "/.jdtls-workspace/" .. project_name
 
 local system_os = ""
 

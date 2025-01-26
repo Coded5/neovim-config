@@ -12,6 +12,9 @@ vim.opt.breakindent = true
 vim.opt.termguicolors = true
 vim.opt.signcolumn = "yes"
 vim.opt.encoding = "UTF-8"
+vim.opt.cursorline = true
+vim.opt.number = true
+vim.opt.laststatus = 3
 
 vim.opt.completeopt = { "menu", "menuone", "noselect" }
 

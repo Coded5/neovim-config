@@ -6,6 +6,7 @@ return {
 		},
 		options = {
 			icons_enabled = true,
+			globalstatus = true,
 		},
 		config = function()
 			vim.g.laststatus = 3
