@@ -13,6 +13,9 @@ return {
 	},
 	{
 		"numToStr/Comment.nvim",
+		dependencies = {
+			"JoosepAlviste/nvim-ts-context-commentstring"
+		},
 		lazy = false,
 		config = function()
 			require("configs.comment")

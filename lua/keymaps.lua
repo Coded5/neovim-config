@@ -6,6 +6,7 @@ map("n", "<A-j>", "ddp")
 map("n", "<A-k>", "dd2kp")
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
+map("n", "<esc>", "<cmd>nohlsearch<cr>")
 
 -- Nvim tree
 map("n", "<C-n>", "<cmd>NvimTreeToggle<CR>", { desc = "Toggle Tree" })
@@ -31,8 +32,6 @@ map("n", "<C-l>", "<cmd>wincmd l<CR>")
 
 map("n", "<C-t>", '<cmd>exe v:count1 . "ToggleTerm"<CR>')
 
-map()
-
 function _G.set_terminal_keymaps()
 	local opts = { buffer = 0 }
 	map("t", "<esc>", [[<C-\><C-n>]], opts)
@@ -51,5 +50,5 @@ map("n", "<C-/>", function()
 end, { noremap = true, silent = true })
 
 map("n", "<Leader>q", function()
-	vim.lsp.inlay_hint.enable(0, not lsp.inlay_hint.is_enabled())
+	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end)
