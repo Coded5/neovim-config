@@ -1,35 +1,20 @@
 return {
-	{
-		"mrcjkb/rustaceanvim",
-		version = "^5",
-		lazy = false,
-		config = function()
-			-- local registry = require("mason-registry")
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^5",
+        lazy = false,
+        config = function()
+            local mason_registry = require('mason-registry')
+            local extension_path = vim.fn.expand("$MASON/packages/codelldb/extension/")
+            local codelldb_path = extension_path .. "adapter/codelldb"
+            local liblldb_path = extension_path .. "lldb/lib/liblldb.so"
+            local cfg = require('rustaceanvim.config')
 
-			-- local codelldb = registry.get_package("codelldb"):get_install_path() .. "/extension"
-			-- local util = require("lspconfig/util")
-
-			vim.g.rustaceanvim = {
-				server = {
-					default_settings = {
-						["rust-analyzaer"] = {
-							diagnostic = {
-								refreshSupport = false, --server request cancelled workaround
-							},
-							cargo = {
-								allFeatures = true,
-							},
-						},
-					},
-				},
-				-- dap = {
-				-- 	autoload_configuration = true,
-				-- 	adapter = require("rustaceanvim.config").get_codelldb_adapter(
-				-- 		codelldb .. "/adapter/codelldb",
-				-- 		codelldb .. "/lldb/lib/libllsd.so"
-				-- 	),
-				-- },
-			}
-		end,
-	},
+            vim.g.rustaceanvim = {
+                dap = {
+                    adapter = cfg.get_codelldb_adapter(codelldb_path, liblldb_path),
+                }
+            }
+        end,
+    },
 }

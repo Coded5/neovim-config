@@ -66,4 +66,8 @@ lazy.setup({
 
 vim.api.nvim_create_user_command("ReloadConfig", "source $MYVIMRC", {})
 
+vim.diagnostic.config({
+    virtual_text = true,
+})
+
 require("keymaps")
