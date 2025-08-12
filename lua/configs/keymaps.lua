@@ -3,6 +3,12 @@ local map = vim.keymap.set
 map("i", "jk", "<esc>")
 map("n", "<esc>", "<cmd>nohlsearch<cr>")
 
+-- Clipboard
+
+map("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
+map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
+map("n", "<leader>P", '"+P', { desc = "PASTE from clipboard" })
+
 --Switching between windows
 
 map("n", "<C-k>", "<CMD>wincmd k<CR>")
