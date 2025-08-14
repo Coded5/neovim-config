@@ -5,9 +5,9 @@ map("n", "<esc>", "<cmd>nohlsearch<cr>")
 
 -- Clipboard
 
-map("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
 map("n", "<leader>P", '"+P', { desc = "PASTE from clipboard" })
+map("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 
 --Switching between windows
 
@@ -31,6 +31,8 @@ map('n', '<leader>fb', builtin.buffers, { desc = 'Telescope buffers' })
 map('n', '<leader>fh', builtin.help_tags, { desc = 'Telescope help tags' })
 
 local on_attach = function(_, bufnr)
+
+    print("on attach!")
 
     map("n", "gd", vim.lsp.buf.definition, { buffer = bufnr, desc = "Go to definition"})
     map("n", "K", vim.lsp.buf.hover, { buffer = bufnr, desc = "Hover"})

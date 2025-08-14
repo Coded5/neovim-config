@@ -23,7 +23,8 @@ return {
             require("moonfly").custom_colors({
                 grey11 = "#474747"
             })
-
+            vim.g.moonflyTransparent = true
+            vim.g.moonflyVirtualTextColor = true
             vim.cmd.colorscheme("moonfly")
         end
     }

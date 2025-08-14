@@ -33,7 +33,8 @@ local config = {
     -- See: https://github.com/eclipse/eclipse.jdt.ls#running-from-the-command-line
     cmd = {
         -- "/usr/lib/jvm/java-21-openjdk-amd64/bin/java",
-        "java",
+        -- "/home/kami/.sdkman/candidates/java/22.0.2-tem/bin/java",
+        "/home/kami/.sdkman/candidates/java/17.0.12-tem/bin/java",
         "-Declipse.application=org.eclipse.jdt.ls.core.id1",
         "-Dosgi.bundles.defaultStartLevel=4",
         "-Declipse.product=org.eclipse.jdt.ls.core.product",
@@ -152,50 +153,61 @@ local config = {
             }
         }
     },
+    on_attach = function(client, bufnr)
+        function nnoremap(rhs, lhs, bufopts, desc)
+            bufopts.desc = desc
+            vim.keymap.set("n", rhs, lhs, bufopts)
+        end
+
+        local bufopts = { noremap = true, silent = true, buffer = bufnr }
+        nnoremap("gD", vim.lsp.buf.declaration, bufopts, "Go to declaration")
+        nnoremap("gd", vim.lsp.buf.definition, bufopts, "Go to definition")
+        nnoremap("gi", vim.lsp.buf.implementation, bufopts, "Go to implementation")
+        nnoremap("K", vim.lsp.buf.hover, bufopts, "Hover text")
+        nnoremap("<C-k>", vim.lsp.buf.signature_help, bufopts, "Show signature")
+        nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
+        nnoremap("<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts, "Remove workspace folder")
+        nnoremap("<space>wl", function()
+            print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
+        end, bufopts, "List workspace folders")
+        nnoremap("<space>D", vim.lsp.buf.type_definition, bufopts, "Go to type definition")
+        nnoremap("<space>rn", vim.lsp.buf.rename, bufopts, "Rename")
+        nnoremap("<space>ca", vim.lsp.buf.code_action, bufopts, "Code actions")
+        vim.keymap.set(
+            "v",
+            "<space>ca",
+            "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
+            { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" }
+        )
+        nnoremap("<space>f", function()
+            vim.lsp.buf.format({ async = true })
+        end, bufopts, "Format file")
+
+        -- Java extensions provided by jdtls
+        nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
+        nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
+        nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
+        vim.keymap.set(
+            "v",
+            "<space>em",
+            [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
+            { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" }
+        )
+
+        jdtls.setup_dap({ hotcodereplace = "auto" })
+        require("jdtls.dap").setup_dap_main_class_configs()
+    end
 }
 
-function nnoremap(rhs, lhs, bufopts, desc)
-    bufopts.desc = desc
-    vim.keymap.set("n", rhs, lhs, bufopts)
-end
 
--- Needed for debugging
-config["on_attach"] = function(client, bufnr)
-    local bufopts = { noremap = true, silent = true, buffer = bufnr }
-    nnoremap("gD", vim.lsp.buf.declaration, bufopts, "Go to declaration")
-    nnoremap("gd", vim.lsp.buf.definition, bufopts, "Go to definition")
-    nnoremap("gi", vim.lsp.buf.implementation, bufopts, "Go to implementation")
-    nnoremap("K", vim.lsp.buf.hover, bufopts, "Hover text")
-    nnoremap("<C-k>", vim.lsp.buf.signature_help, bufopts, "Show signature")
-    nnoremap("<space>wa", vim.lsp.buf.add_workspace_folder, bufopts, "Add workspace folder")
-    nnoremap("<space>wr", vim.lsp.buf.remove_workspace_folder, bufopts, "Remove workspace folder")
-    nnoremap("<space>wl", function()
-        print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-    end, bufopts, "List workspace folders")
-    nnoremap("<space>D", vim.lsp.buf.type_definition, bufopts, "Go to type definition")
-    nnoremap("<space>rn", vim.lsp.buf.rename, bufopts, "Rename")
-    nnoremap("<space>ca", vim.lsp.buf.code_action, bufopts, "Code actions")
-    vim.keymap.set(
-        "v",
-        "<space>ca",
-        "<ESC><CMD>lua vim.lsp.buf.range_code_action()<CR>",
-        { noremap = true, silent = true, buffer = bufnr, desc = "Code actions" }
-    )
-    nnoremap("<space>f", function()
-        vim.lsp.buf.format({ async = true })
-    end, bufopts, "Format file")
+jdtls.start_or_attach(config)
 
-    -- Java extensions provided by jdtls
-    nnoremap("<C-o>", jdtls.organize_imports, bufopts, "Organize imports")
-    nnoremap("<space>ev", jdtls.extract_variable, bufopts, "Extract variable")
-    nnoremap("<space>ec", jdtls.extract_constant, bufopts, "Extract constant")
-    vim.keymap.set(
-        "v",
-        "<space>em",
-        [[<ESC><CMD>lua require('jdtls').extract_method(true)<CR>]],
-        { noremap = true, silent = true, buffer = bufnr, desc = "Extract method" }
-    )
-
-    jdtls.setup_dap({ hotcodereplace = "auto" })
-    require("jdtls.dap").setup_dap_main_class_configs()
-end
+vim.api.nvim_create_autocmd("LspAttach", {
+    pattern = "*.java",
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client and client.name == "jdtls" then
+            config.on_attach(client, args.buf)
+        end
+    end,
+})
