@@ -16,7 +16,7 @@ return {
     {
         "bluz71/vim-moonfly-colors",
         name = "moonfly",
-        enabled = true,
+        enabled = false,
         lazy = false,
         priority = 1000,
         config = function ()
@@ -26,6 +26,15 @@ return {
             vim.g.moonflyTransparent = true
             vim.g.moonflyVirtualTextColor = true
             vim.cmd.colorscheme("moonfly")
+        end
+    },
+    {
+        "catppuccin/nvim",
+        name = "catppuccin",
+        priority = 1000,
+        enabled = true,
+        config = function ()
+            vim.cmd.colorscheme("catppuccin")
         end
     }
 }

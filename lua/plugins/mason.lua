@@ -2,17 +2,17 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         opts = {
-            ensure_installed = {
-                "lua_ls",
-                "pyright",
-                "rust_analyzer" ,
-                "jdtls",
-                "eslint",
-                "ts_ls",
-                "html",
-                "cssls",
-                "clangd"
-            }
+            -- ensure_installed = {
+            --     "lua_ls",
+            --     "pyright",
+            --     "rust_analyzer" ,
+            --     "jdtls",
+            --     "eslint",
+            --     "ts_ls",
+            --     "html",
+            --     "cssls",
+            --     "clangd"
+            -- }
         },
         dependencies = {
             { 

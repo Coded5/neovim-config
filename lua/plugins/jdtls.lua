@@ -1,5 +1,6 @@
 return {
     {
-        "mfussenegger/nvim-jdtls"
+        "mfussenegger/nvim-jdtls",
+        enabled = true
     }
 }

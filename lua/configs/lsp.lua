@@ -1,14 +1,17 @@
 require('mason').setup()
 
+local exclude = {"rust_analyzer", "jdtls"}
 local mason_lspconfig = require('mason-lspconfig')
-mason_lspconfig.setup()
+require("mason-lspconfig").setup {
+    automatic_enable = {
+        exclude = exclude
+    }
+}
 
 local lspconfig = require("lspconfig")
-
 local capabilities = require("blink.cmp").get_lsp_capabilities()
-local on_attach = require("configs.keymaps").on_attach
+local on_attach = require("configs.keymaps").on_attach()
 
-local exclude = {"rust_analyzer", "jdtls"}
 
 local in_exclude = function (val)
     for _, excluded in ipairs(exclude) do
