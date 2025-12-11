@@ -1,35 +1,10 @@
-require('mason').setup()
+require("mason").setup()
+require("mason-lspconfig").setup() -- Optional, but good if you use ensure_installed
 
-local exclude = {"rust_analyzer", "jdtls"}
-local mason_lspconfig = require('mason-lspconfig')
-require("mason-lspconfig").setup {
-    automatic_enable = {
-        exclude = exclude
-    }
-}
+local installed_servers = require("mason-lspconfig").get_installed_servers()
 
-local lspconfig = require("lspconfig")
-local capabilities = require("blink.cmp").get_lsp_capabilities()
-local on_attach = require("configs.keymaps").on_attach()
-
-
-local in_exclude = function (val)
-    for _, excluded in ipairs(exclude) do
-        if excluded == val then
-            return true
-        end
-    end
-
-    return false
-end
-
-for _, server in ipairs(mason_lspconfig.get_installed_servers()) do
-   if not in_exclude(server) then
-        lspconfig[server].setup {
-           capabilities = capabilities,
-           on_attach = on_attach
-        }
-   end
+for _, server in ipairs(installed_servers) do
+    vim.lsp.enable(server)
 end
 
 vim.diagnostic.config({
