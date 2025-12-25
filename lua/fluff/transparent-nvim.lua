@@ -1,6 +1,6 @@
 return {
-    {
-        "xiyaowong/transparent.nvim",
-        enabled = false,
-    },
+	{
+		"xiyaowong/transparent.nvim",
+		enabled = false,
+	},
 }
