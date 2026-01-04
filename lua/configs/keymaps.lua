@@ -6,7 +6,7 @@ map("n", "<esc>", "<cmd>nohlsearch<cr>")
 -- Clipboard
 
 map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
-map("n", "<leader>P", '"+P', { desc = "PASTE from clipboard" })
+map("n", "<leader>P", '"_dP', { desc = "PASTE from clipboard" })
 map("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
 
 --Switching between windows
@@ -72,19 +72,6 @@ map("n", "<C-4>", function()
 	harpoon:list():select(4)
 end)
 
--- map("n", "<C-h>", function()
--- 	harpoon:list():select(1)
--- end)
--- map("n", "<C-t>", function()
--- 	harpoon:list():select(2)
--- end)
--- map("n", "<C-n>", function()
--- 	harpoon:list():select(3)
--- end)
--- map("n", "<C-s>", function()
--- 	harpoon:list():select(4)
--- end)
-
 -- Toggle previous & next buffers stored within Harpoon list
 map("n", "<C-S-P>", function()
 	harpoon:list():prev()
@@ -93,3 +80,10 @@ end)
 map("n", "<C-S-N>", function()
 	harpoon:list():next()
 end)
+
+-- Copilot keymaps
+
+map("n", "<leader>ci", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel" })
+map("n", "<leader>cj", "<cmd>Copilot next<cr>", { desc = "Next Copilot suggestion" })
+map("n", "<leader>ck", "<cmd>Copilot previous<cr>", { desc = "Previous Copilot suggestion" })
+map("n", "<leader>cx", "<cmd>Copilot clear<cr>", { desc = "Clear Copilot suggestions" })
