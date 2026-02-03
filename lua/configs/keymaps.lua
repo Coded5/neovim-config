@@ -5,9 +5,17 @@ map("n", "<esc>", "<cmd>nohlsearch<cr>")
 
 -- Clipboard
 
-map("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
-map("n", "<leader>P", '"_dP', { desc = "PASTE from clipboard" })
-map("n", "<leader>y", '"+y', { desc = "Copy to clipboard" })
+-- Copy to clipboard (Works with motions: <leader>y + ip)
+map({"n", "v"}, "<leader>y", '"+y', { desc = "Copy to clipboard" })
+
+-- Copy current line to clipboard (The 'YY' equivalent)
+map("n", "<leader>Y", '"+Y', { desc = "Copy line to clipboard" })
+
+-- Paste from clipboard
+map({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+
+-- "Greatest paste" (Pastes over visual selection without losing current register)
+map("x", "<leader>P", '"_dP', { desc = "Paste over selection" })
 
 --Switching between windows
 
@@ -87,3 +95,8 @@ map("n", "<leader>ci", "<cmd>Copilot panel<cr>", { desc = "Open Copilot panel" }
 map("n", "<leader>cj", "<cmd>Copilot next<cr>", { desc = "Next Copilot suggestion" })
 map("n", "<leader>ck", "<cmd>Copilot previous<cr>", { desc = "Previous Copilot suggestion" })
 map("n", "<leader>cx", "<cmd>Copilot clear<cr>", { desc = "Clear Copilot suggestions" })
+
+-- Obsidian
+
+map("n", "gf", "<cmd>Obsidian follow_link<cr>", { desc = "Enter link" })
+map("n", "gF", "<cmd>Obsidian backlinks<cr>", { desc = "Go back" })

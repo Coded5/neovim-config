@@ -14,3 +14,4 @@ vim.opt.encoding = "UTF-8"
 vim.opt.cursorline = true
 vim.opt.laststatus = 3
 vim.opt.signcolumn = "yes"
+vim.opt.conceallevel = 2
