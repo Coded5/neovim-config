@@ -3,16 +3,20 @@ local map = vim.keymap.set
 map("i", "jk", "<esc>")
 map("n", "<esc>", "<cmd>nohlsearch<cr>")
 
+-- Select line
+
+map("n", "<leader>v", "0vg_", { desc = "Select line" })
+
 -- Clipboard
 
 -- Copy to clipboard (Works with motions: <leader>y + ip)
-map({"n", "v"}, "<leader>y", '"+y', { desc = "Copy to clipboard" })
+map({ "n", "v" }, "<leader>y", '"+y', { desc = "Copy to clipboard" })
 
 -- Copy current line to clipboard (The 'YY' equivalent)
 map("n", "<leader>Y", '"+Y', { desc = "Copy line to clipboard" })
 
 -- Paste from clipboard
-map({"n", "v"}, "<leader>p", '"+p', { desc = "Paste from clipboard" })
+map({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from clipboard" })
 
 -- "Greatest paste" (Pastes over visual selection without losing current register)
 map("x", "<leader>P", '"_dP', { desc = "Paste over selection" })
